@@ -1,7 +1,12 @@
 {
     "material": {
         "Gold": {
-            "permeability": 0.99996}
+            "permeability": 0.99996,
+            "permittivity":1},
+        "Bismuth": {
+            "permeability": 0.99983,
+            "permittivity":1}
     }
     
 }
+
