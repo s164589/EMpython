@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+## 
+
 import math
 
 
@@ -16,7 +18,7 @@ def findFreqWithOmega(omega):
 # beta = 2 * pi / lambda
 def findBetaWithLamb(lamb):
     beta = (2 * math.pi) / lamb
-    return lamb
+    return beta
 
 
 
