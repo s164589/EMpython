@@ -48,6 +48,18 @@ def getPolarization(E_0real, E_0imag):
     else:
         return "Elliptical polarized"
 
+def getRightOrLeftPol(E_0real, E_0imag, betaVec):
+    cross = np.cross(E_0real, E_0imag)
+    dot = np.dot(betaVec, cross)
+
+    if(np.less(dot, 0)):
+        return "Left-hand polarization"
+    elif(np.greater(dot, 0)):
+        return "Right-hand polarization"
+    else:
+        return "Error maybe it's linear?"
+
+
 #betaVec
 #rVec
 
