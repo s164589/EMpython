@@ -15,6 +15,7 @@ print(mu_zero)
 print(epsilon_zero)
 print(data["material"]["Gold"])
 print(data["material"]["Bismuth"])
+print(data["material"])
 
 print(transform.findFreqWithOmega(50*math.pi))
 

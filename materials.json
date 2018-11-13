@@ -5,7 +5,22 @@
             "permittivity":1},
         "Bismuth": {
             "permeability": 0.99983,
-            "permittivity":1}
+            "permittivity":1},
+        "Mercury": {
+            "permeability": 0.99997,
+            "permittivity":1},
+        "Silver": {
+            "permeability": 0.99998,
+            "permittivity":1},
+        "Copper": {
+            "permeability": 0.99999,
+            "permittivity":1},
+        "Water": {
+            "permeability": 0.99999,
+            "permittivity":80},
+        "Air": {
+            "permeability": 1.000004,
+            "permittivity":1.0006}
     }
     
 }
