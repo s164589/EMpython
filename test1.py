@@ -20,8 +20,11 @@ print(data["material"]["Gold"])
 print(data["material"]["Bismuth"])
 print(data["material"])
 
+## Transform test
 print(transform.findFreqWithOmega(50*math.pi))
 
+
+## Intrinsic polarization test
 E_0real = [0,0.j,0.j]
 E_0imag = [1,1.j,8]
 
