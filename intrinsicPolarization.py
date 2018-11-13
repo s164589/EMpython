@@ -35,4 +35,5 @@ E_0real = [0,0.j,0.j]
 E_0imag = [1,1.j,8]
 
 print(isWaveCircularPol(E_0real,E_0imag))
+print("Hej")
 
