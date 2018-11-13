@@ -20,7 +20,40 @@
             "permittivity":80},
         "Air": {
             "permeability": 1.000004,
-            "permittivity":1.0006}
+            "permittivity":1.0006},
+        "aluminum": {
+            "permeability":1.00002,
+            "permittivity":1},
+        "tungsten":{
+            "permeability":1.00008,
+            "permittivity":1},
+        "titanium":{
+            "permeability":1.0002,
+            "permittivity":1},
+        "platinum":{
+            "permeability":1.0003,
+            "permittivity":1},
+        "cobalt":{
+            "permeability":250,
+            "permittivity":1},
+        "nickel":{
+            "permeability":600,
+            "permittivity":1},
+        "steel":{
+            "permeability":2000,
+            "permittivity":1},
+        "iron":{
+            "permeability":4500,
+            "permittivity":1},
+        "silicon iron":{
+            "permeability":7000,
+            "permittivity":1},
+        "mumetal":{
+            "permeability":100000,
+            "permittivity":1},
+        "purified iron":{
+            "permeability":200000,
+            "permittivity":1}
     }
     
 }
