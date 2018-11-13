@@ -7,6 +7,7 @@ import numpy as np
 
 
 ## E_0real and E_0imag are real vectors
+## Check if Wave is linear polarization
 def isWaveLinearPol(E_0real, E_0imag):
     cross = np.cross(E_0real, E_0imag)
 
@@ -15,11 +16,35 @@ def isWaveLinearPol(E_0real, E_0imag):
     else:
         return False
 
+## Check if Wave is Circular polarization
 def isWaveCircularPol(E_0real, E_0imag):
-    if(np.equal(np.absolute(E_0real))):
+    if(np.equal(np.absolute(E_0real), 0)):
         return False
-    elif(np.equal(np.absolute(E_0imag))):
+    elif(np.equal(np.absolute(E_0imag), 0)):
         return False
+    elif(np.equal(np.dot(E_0real, E_0imag), 0)):
+        if(np.equal(np.absolute(E_0real), np.absolute(E_0imag))):
+            return True
+    else:
+        return False
+
+## Check if Wave is not linear or circular polarization
+def isWaveOnlyElliptical(E_0real, E_0imag):
+    if(isWaveLinearPol(E_0real, E_0imag)):
+        return False
+    elif(isWaveCircularPol(E_0real, E_0imag)):
+        return False
+    else:
+        return True
+
+
+def getPolarization(E_0real, E_0imag):
+    if(isWaveLinearPol(E_0real, E_0imag)):
+        return "Linear polarized"
+    elif(isWaveCircularPol(E_0real, E_0imag)):
+        return "Circular polarized"
+    else:
+        return "Elliptical polarized"
 
 #betaVec
 #rVec
