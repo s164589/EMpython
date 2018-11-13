@@ -10,6 +10,7 @@ import intrinsicPolarization as inPol
 mu_zero = 4 * math.pi * pow(10, -7)
 epsilon_zero = 8.854 * pow(10, -12)
 
+## JSON Test lookup table
 with open("materials.json", "r") as material_file:
     data = json.load(material_file)
 
