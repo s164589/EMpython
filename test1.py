@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 import transform
-import intrinsicPolarization as inPol
+import functions as func
 
 
 mu_zero = 4 * math.pi * pow(10, -7)
@@ -29,8 +29,8 @@ E_0real = [0,9,0]
 E_0imag = [9,0,0]
 betaVec = [0,0,1]
 
-print(inPol.getPolarization(E_0real, E_0imag))
+print(func.getPolarization(E_0real, E_0imag))
 
-print(inPol.getRightOrLeftPol(E_0real, E_0imag, betaVec))
+print(func.getRightOrLeftPol(E_0real, E_0imag, betaVec))
 
-print(inPol.findMajorAndMinorSemiAxes(E_0real, E_0imag))
+print(func.findMajorAndMinorSemiAxes(E_0real, E_0imag))

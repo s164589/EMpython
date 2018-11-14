@@ -85,7 +85,10 @@ def findMajorAndMinorSemiAxes(E_0real, E_0imag):
         major = E_1_norm
         minor = E_1_norm
 
-    return major, minor
+    AR = major / minor
+
+    return major, minor, AR
+
 
 
 #E_0 = E_0real + j * E_0imag
