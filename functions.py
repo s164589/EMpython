@@ -89,6 +89,16 @@ def findMajorAndMinorSemiAxes(E_0real, E_0imag):
 
     return major, minor, AR
 
+def emWavePowerInst(E_field, H_field):
+    S = np.cross(E_field, H_field)
+    return S
+
+def emWavePowerRMS(E_field, H_field):
+    cross = np.cross(E_field, np.conj(H_field))
+    S = (1/2) * np.real(cross)
+    
+    return S
+
 
 
 #E_0 = E_0real + j * E_0imag
