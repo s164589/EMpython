@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+##
+##  Author: Emil Svendsen
+##  Date:   14/11-2018
 
 import math
 import numpy as np
@@ -7,6 +10,7 @@ import numpy as np
 
 
 ## E_0real and E_0imag are real vectors
+## Works with H_0real and H_0imag as well
 ## Check if Wave is linear polarization
 def isWaveLinearPol(E_0real, E_0imag):
     cross = np.cross(E_0real, E_0imag)
@@ -36,7 +40,7 @@ def isWaveOnlyElliptical(E_0real, E_0imag):
     else:
         return True
 
-
+## Returns waves polarization
 def getPolarization(E_0real, E_0imag):
     if(np.equal(E_0real, 0).all() and np.equal(E_0imag, 0).all()):
             print("Both vectors can't be zero.")
@@ -48,7 +52,8 @@ def getPolarization(E_0real, E_0imag):
     else:
         return "Elliptical polarized"
 
-def getRightOrLeftPol(E_0real, E_0imag, betaVec):
+## Only works with Electric field
+def getRightOrLeftPolE_field(E_0real, E_0imag, betaVec):
     cross = np.cross(E_0real, E_0imag)
     dot = np.dot(betaVec, cross)
     if(np.less(dot, 0)):
@@ -57,6 +62,18 @@ def getRightOrLeftPol(E_0real, E_0imag, betaVec):
         return "Right-hand polarization"
     else:
         return "Error maybe it's linear or beta is not perpendicular to the electric field?"
+
+## Only works with Magnetic field
+def getRightOrLeftPolH_field(H_0real, H_0imag, betaVec):
+    cross = np.cross(H_0real, - H_0imag)
+    dot = np.dot(betaVec, cross)
+    if(np.less(dot, 0)):
+        return "Left-hand polarization"
+    elif(np.greater(dot, 0)):
+        return "Right-hand polarization"
+    else:
+        return "Error maybe it's linear or beta is not perpendicular to the electric field?"
+
 
 def findMajorAndMinorSemiAxes(E_0real, E_0imag):
     E_0real = np.asarray(E_0real)
@@ -85,7 +102,10 @@ def findMajorAndMinorSemiAxes(E_0real, E_0imag):
         major = E_1_norm
         minor = E_1_norm
 
-    AR = major / minor
+    if(isWaveLinearPol(E_0real, E_0imag)):
+        AR = "Infinity"
+    else:
+        AR = major / minor
 
     return major, minor, AR
 
@@ -98,6 +118,12 @@ def emWavePowerRMS(E_field, H_field):
     S = (1/2) * np.real(cross)
     
     return S
+
+def splitRealImag(Field_0):
+    Field_0real = np.real(Field_0)
+    Field_0imag = np.imag(Field_0)
+
+    return Field_0real, Field_0imag
 
 
 

@@ -25,12 +25,16 @@ epsilon_zero = 8.854 * pow(10, -12)
 
 
 ## Intrinsic polarization test
-E_0real = [0,9,0]
-E_0imag = [9,0,0]
-betaVec = [0,0,1]
 
-print(func.getPolarization(E_0real, E_0imag))
 
-print(func.getRightOrLeftPol(E_0real, E_0imag, betaVec))
+H_0 = [1, np.complex(0, np.sqrt(2)), 1]
 
-print(func.findMajorAndMinorSemiAxes(E_0real, E_0imag))
+H_0real, H_0imag = func.splitRealImag(H_0)
+
+betaVec =  [-32.329/np.sqrt(2), 0, 32.329/np.sqrt(2)]
+
+print(func.getPolarization(H_0real, H_0imag))
+
+print(func.getRightOrLeftPolH_field(H_0real, H_0imag, betaVec))
+
+print(func.findMajorAndMinorSemiAxes(H_0real, H_0imag))
