@@ -27,6 +27,10 @@ epsilon_zero = 8.854 * pow(10, -12)
 ## Intrinsic polarization test
 E_0real = [0,9,0]
 E_0imag = [9,0,0]
+betaVec = [0,0,1]
 
 print(inPol.getPolarization(E_0real, E_0imag))
 
+print(inPol.getRightOrLeftPol(E_0real, E_0imag, betaVec))
+
+print(inPol.findMajorAndMinorSemiAxes(E_0real, E_0imag))
