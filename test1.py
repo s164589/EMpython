@@ -119,3 +119,27 @@ betaVec = [np.sqrt(3), 0, -1]
 
 print("S: ", func.findPower_EfieldEtaBetaEV(E_0, eta, betaVec))
 
+# Spørgsmål 11
+
+epsilon_r = 9
+mu_r = 1
+sigma = 0
+eta = func.findInImLossLess(mu_r, epsilon_r)
+
+epsilon_r_2 = 16
+mu_r_2 = 1
+sigma_2 = 0
+eta_2 = func.findInImLossLess(mu_r_2, epsilon_r_2)
+
+n_vector = [0, 10, 0]
+betaVec = [1, 2, 0]
+E_0 = [0, 0, 4]
+
+print("TE or TM: ", func.TeTmPolarization(E_0, betaVec, n_vector))
+
+tau = func.getTauPerpendicular(betaVec, n_vector, eta, eta_2)
+
+
+
+
+

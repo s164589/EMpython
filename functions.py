@@ -116,6 +116,49 @@ def findMajorAndMinorSemiAxis(E_0real, E_0imag):
 
     return major, minor, AR
 
+##                                                                                                              TE/TM polarization
+###############################################################################################################################
+## Find TE or TM polarization
+def TeTmPolarization(E_0, betaVec, nVec):
+    if(np.equal(np.cross(nVec, betaVec), 0).all()):
+        # Normal incident
+        return "Normal incident"
+    elif(np.equal(np.dot(E_0, nVec), 0)):
+        # Perpendicular polarization
+        return "TE, perpendicular polarization"
+    elif(np.equal(np.dot(np.cross(betaVec, E_0), nVec), 0)):
+        # Parallel polarization
+        return "TM, parallel polarization"
+    else:
+        return "Something in between"
+
+###############################################################################################################################
+## Find gamma perpendicular with respect to the electric field
+def getGammaPerpendicular(betaVec, nVec, eta1, eta2):
+    betaVec_norm = np.linalg.norm(betaVec)
+    nVec_norm = np.linalg.norm(nVec)
+    cosVi = np.divide(np.dot(betaVec, nVec), (betaVec_norm * nVec_norm))
+    Vi = np.arccos(cosVi)
+    Vt = np.arcsin((eta2 / eta1) * np.sin(Vi))
+    num = eta2 * cosVi - eta1 * np.cos(Vt)
+    denum = eta2 * cosVi + eta1 * np.cos(Vt)
+    gamma = num / denum
+    return gamma
+
+###############################################################################################################################
+## Find tau perpendicular
+def getTauPerpendicular(betaVec, nVec, eta1, eta2):
+    betaVec_norm = np.linalg.norm(betaVec)
+    nVec_norm = np.linalg.norm(nVec)
+    cosVi = np.divide(np.dot(betaVec, nVec), (betaVec_norm * nVec_norm))
+    Vi = np.arccos(cosVi)
+    Vt = np.arcsin((eta2 / eta1) * np.sin(Vi))
+    num = 2 * eta2 * cosVi
+    denum = eta2 * cosVi + eta1 * np.cos(Vt)
+    tau = num / denum
+    return tau
+
+
 ##                                                                                                              Power
 ###############################################################################################################################
 ## Finds instant power 
