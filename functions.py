@@ -5,8 +5,6 @@
 
 import numpy as np
 
-
-
 ##                                                                                                              Polarization
 ###############################################################################################################################
 ## E_0real and E_0imag are real vectors
@@ -158,6 +156,26 @@ def getTauPerpendicular(betaVec, nVec, eta1, eta2):
     tau = num / denum
     return tau
 
+###############################################################################################################################
+## Find E-field transmit
+def getE_TransmitPerpendicular(E_0i, betaVec, nVec, eta1, eta2):
+    tau = getTauPerpendicular(betaVec, nVec, eta1, eta2)
+    E_0t = np.multiply(tau, E_0i)
+    return E_0t
+
+###############################################################################################################################
+## Find E-field transmitted power
+def getTransmittedPowerDensityPerpendicular(E_0i, betaVec, nVec, eta1, eta2):
+    tau = getTauPerpendicular(betaVec, nVec, eta1, eta2)
+    tauSq = np.linalg.norm(tau)**2
+    betaVec_norm = np.linalg.norm(betaVec)
+    nVec_norm = np.linalg.norm(nVec)
+    cosVi = np.divide(np.dot(betaVec, nVec), (betaVec_norm * nVec_norm))
+    Vi = np.arccos(cosVi)
+    Vt = np.arcsin((eta2 / eta1) * np.sin(Vi))
+    T = tauSq * (eta1 / eta2) * (np.cos(Vt) / cosVi)
+    return T
+
 
 ##                                                                                                              Power
 ###############################################################################################################################
@@ -177,9 +195,7 @@ def emWavePowerRMS(E_field, H_field):
 ###############################################################################################################################
 ## Find power with E-field or the norm of E-field, intrinsic impedance and beta vector
 def findPower_EfieldEtaBetaEV(E_field, eta, betaVec):
-    print(betaVec)
     betaNormalizedVec = np.divide(betaVec, np.linalg.norm(betaVec))
-    print(betaNormalizedVec)
     S = np.multiply((1/2) * (np.linalg.norm(E_field)**2) / eta, betaNormalizedVec)
     return S
 

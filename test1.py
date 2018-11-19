@@ -139,7 +139,9 @@ print("TE or TM: ", func.TeTmPolarization(E_0, betaVec, n_vector))
 
 tau = func.getTauPerpendicular(betaVec, n_vector, eta, eta_2)
 
+# Spørgsmål 12
 
 
 
+print("Power transmitted: ", func.getTransmittedPowerDensityPerpendicular(E_0, betaVec, n_vector, eta, eta_2), " %")
 
