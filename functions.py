@@ -188,7 +188,17 @@ def qualityOfConDie(sigma, omega, epsilon_r):
         return "Quasi-conductor"
 
 ###############################################################################################################################
-## Find intrinsic impedance
+## Find intrinsic impedance with mu, epsilon, sigma and omega
+def findInIm(mu_r, epsilon_r, sigma, omega):
+    mu_zero = 4 * np.pi * 10**(-7)
+    epsilon_zero = 8.854 * 10**(-12)
+    epsilon = epsilon_zero * epsilon_r
+    mu = mu_zero * mu_r
 
+    squareRoot = np.sqrt(mu / epsilon) 
+    minSqRt = (1 - 1.j * (sigma / (omega * epsilon)))**(-1/2)
+
+    intrinsicImp = squareRoot * minSqRt
+    return intrinsicImp
 
 
