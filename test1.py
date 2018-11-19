@@ -100,5 +100,5 @@ omega = func.findOmega_Freq(freq)
 
 print("n_c: ", func.findComRefraction(mu_r, epsilon_r, sigma, omega))
 
-# Spørgsmål 9
+# Spørgsmål 10
 

@@ -264,4 +264,10 @@ def findComRefraction(mu_r, epsilon_r, sigma, omega):
     return n_c
 
 
+############################################################################################################################### 
+## Find H-field with intrinsic impedance, betaEigenVec and E-field
+def findHfield(intImp, betaEVec, E_field):
+    cross = np.cross(betaEVec, E_field)
+    H_field = np.multiply((1 / intImp), cross) 
+    return H_field
 
