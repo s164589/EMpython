@@ -143,7 +143,7 @@ def splitRealImag(Field_0):
 
 ###############################################################################################################################
 ## Finds Up (phase velocity) with mu and epsilon
-def findUp_EpMu(mu_r, epsilon_r):
+def findUp_MuEp(mu_r, epsilon_r):
     mu_zero = 4 * np.pi * 10**(-7)
     epsilon_zero = 8.854 * 10**(-12)
     Up = 1 / np.sqrt(mu_zero * mu_r * epsilon_zero * epsilon_r)
@@ -153,7 +153,7 @@ def findUp_EpMu(mu_r, epsilon_r):
 ###############################################################################################################################
 ## Finds Frequency with mu, epsilon and betaVec.  !OBS! LOSSLESS (sigma = 0) => alpha = 0
 def findFreq_MuEpBeta(mu_r, epsilon_r, betaVec):
-    Up = findUp_EpMu(mu_r, epsilon_r)
+    Up = findUp_MuEp(mu_r, epsilon_r)
     beta_norm = np.linalg.norm(betaVec)
     freq = (Up * beta_norm) / (2 * np.pi)
     return freq
@@ -201,4 +201,55 @@ def findInIm(mu_r, epsilon_r, sigma, omega):
     intrinsicImp = squareRoot * minSqRt
     return intrinsicImp
 
+###############################################################################################################################
+## Find skin depth with alpha
+def findSkinDepth_alpha(alpha):
+    deltaS = 1 / alpha
+    return deltaS
 
+###############################################################################################################################
+## Find alpha with mu, epsilon, sigma and omega
+def findAlpha(mu_r, epsilon_r, sigma, omega):
+    mu_zero = 4 * np.pi * 10**(-7)
+    epsilon_zero = 8.854 * 10**(-12)
+    epsilon = epsilon_zero * epsilon_r
+    epsilon2 = sigma / omega
+    mu = mu_zero * mu_r
+
+    del1 = (mu * epsilon) / 2
+    del2 = (np.sqrt(1 + (epsilon2 / epsilon)**2) - 1)
+    alpha = omega * (del1 * del2)**(1/2)
+    return alpha
+
+############################################################################################################################### 
+## Find beta with mu, epsilon, sigma and omega
+###### OBS ikke testet
+def findBeta(mu_r, epsilon_r, sigma, omega):
+    mu_zero = 4 * np.pi * 10**(-7)
+    epsilon_zero = 8.854 * 10**(-12)
+    epsilon = epsilon_zero * epsilon_r
+    epsilon2 = sigma / omega
+    mu = mu_zero * mu_r
+
+    del1 = (mu * epsilon) / 2
+    del2 = (np.sqrt(1 + (epsilon2 / epsilon)**2) + 1)
+    beta = omega * (del1 * del2)**(1/2)
+    return beta
+
+
+############################################################################################################################### 
+## Find surface risistance (R_s) with mu, sigma and frequency
+def findSurfaceRis(mu_r, sigma, freq):
+    mu_zero = 4 * np.pi * 10**(-7)
+    mu = mu_zero * mu_r
+
+    R_s = np.sqrt((np.pi * freq * mu) / sigma)
+    return R_s
+
+############################################################################################################################### 
+## Is the surface thick enough (infinite thick)
+def isSurfaceInfinite(thickness, delta_s):
+    if(thickness > delta_s * 5):
+        return "Yes, surface can be considered as infinite thick"
+    else:
+        return "No, surface is too thin"
