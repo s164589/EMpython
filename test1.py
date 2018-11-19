@@ -89,7 +89,16 @@ thickness = 10 * 10**(-6)
 
 print("Is surface thick enough: ", func.isSurfaceInfinite(thickness, skinDepth))
 
+# Spørgsmål 8
 
+mu_r = 3.4
+epsilon_r = 12.1
+sigma = 100 * 10**(-3)
+freq = 10 * 10**12
 
+omega = func.findOmega_Freq(freq)
 
+print("n_c: ", func.findComRefraction(mu_r, epsilon_r, sigma, omega))
+
+# Spørgsmål 9
 

@@ -77,7 +77,7 @@ def getRightOrLeftPolH_field(H_0real, H_0imag, betaVec):
     elif(np.greater(dot, 0)):
         return "Right-hand polarization"
     else:
-        return "Error maybe it's linear or beta is not perpendicular to the electric field?"
+        return "Error maybe it's linear or beta is not perpendicular to the field?"
 
 ###############################################################################################################################
 ## Finds major axis, minor axis and axial ratio 
@@ -253,3 +253,15 @@ def isSurfaceInfinite(thickness, delta_s):
         return "Yes, surface can be considered as infinite thick"
     else:
         return "No, surface is too thin"
+
+############################################################################################################################### 
+## Find complex refraction n_c with mu, epsilon, sigma and omega
+def findComRefraction(mu_r, epsilon_r, sigma, omega):
+    epsilon_zero = 8.854 * 10**(-12)
+
+    epsilon_c_r = epsilon_r - 1.j*(sigma / (omega * epsilon_zero))
+    n_c = np.sqrt( mu_r * epsilon_c_r )
+    return n_c
+
+
+
