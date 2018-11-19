@@ -3,12 +3,12 @@
 ##  Author: Emil Svendsen
 ##  Date:   14/11-2018
 
-import math
 import numpy as np
 
 
 
-
+##                                                                                                              Polarization
+###############################################################################################################################
 ## E_0real and E_0imag are real vectors
 ## Works with H_0real and H_0imag as well
 ## Check if Wave is linear polarization
@@ -19,6 +19,7 @@ def isWaveLinearPol(E_0real, E_0imag):
     else:
         return False
 
+###############################################################################################################################
 ## Check if Wave is Circular polarization
 def isWaveCircularPol(E_0real, E_0imag):
     if(np.equal(np.linalg.norm(E_0real), 0)):
@@ -31,6 +32,7 @@ def isWaveCircularPol(E_0real, E_0imag):
     else:
         return False
 
+###############################################################################################################################
 ## Check if Wave is not linear or circular polarization
 def isWaveOnlyElliptical(E_0real, E_0imag):
     if(isWaveLinearPol(E_0real, E_0imag)):
@@ -40,6 +42,7 @@ def isWaveOnlyElliptical(E_0real, E_0imag):
     else:
         return True
 
+###############################################################################################################################
 ## Returns waves polarization
 def getPolarization(E_0real, E_0imag):
     if(np.equal(E_0real, 0).all() and np.equal(E_0imag, 0).all()):
@@ -52,6 +55,7 @@ def getPolarization(E_0real, E_0imag):
     else:
         return "Elliptical polarized"
 
+###############################################################################################################################
 ## Only works with Electric field
 def getRightOrLeftPolE_field(E_0real, E_0imag, betaVec):
     cross = np.cross(E_0real, E_0imag)
@@ -63,6 +67,7 @@ def getRightOrLeftPolE_field(E_0real, E_0imag, betaVec):
     else:
         return "Error maybe it's linear or beta is not perpendicular to the electric field?"
 
+###############################################################################################################################
 ## Only works with Magnetic field
 def getRightOrLeftPolH_field(H_0real, H_0imag, betaVec):
     cross = np.cross(H_0real, - H_0imag)
@@ -74,8 +79,9 @@ def getRightOrLeftPolH_field(H_0real, H_0imag, betaVec):
     else:
         return "Error maybe it's linear or beta is not perpendicular to the electric field?"
 
-
-def findMajorAndMinorSemiAxes(E_0real, E_0imag):
+###############################################################################################################################
+## Finds major axis, minor axis and axial ratio 
+def findMajorAndMinorSemiAxis(E_0real, E_0imag):
     E_0real = np.asarray(E_0real)
     E_0imag = np.asarray(E_0imag)
     E_0real_norm = np.linalg.norm(E_0real)
@@ -104,21 +110,30 @@ def findMajorAndMinorSemiAxes(E_0real, E_0imag):
 
     if(isWaveLinearPol(E_0real, E_0imag)):
         AR = "Infinity"
+        minor = 0
     else:
         AR = major / minor
 
     return major, minor, AR
 
+##                                                                                                              Power
+###############################################################################################################################
+## Finds instant power 
 def emWavePowerInst(E_field, H_field):
     S = np.cross(E_field, H_field)
     return S
 
+###############################################################################################################################
+## Finds RMS power
 def emWavePowerRMS(E_field, H_field):
     cross = np.cross(E_field, np.conj(H_field))
     S = (1/2) * np.real(cross)
     
     return S
 
+##                                                                                                              Utilities
+###############################################################################################################################
+## Splits a field into real and an imaginary part
 def splitRealImag(Field_0):
     Field_0real = np.real(Field_0)
     Field_0imag = np.imag(Field_0)
@@ -126,12 +141,54 @@ def splitRealImag(Field_0):
     return Field_0real, Field_0imag
 
 
+###############################################################################################################################
+## Finds Up (phase velocity) with mu and epsilon
+def findUp_EpMu(mu_r, epsilon_r):
+    mu_zero = 4 * np.pi * 10**(-7)
+    epsilon_zero = 8.854 * 10**(-12)
+    Up = 1 / np.sqrt(mu_zero * mu_r * epsilon_zero * epsilon_r)
+    return Up
 
-#E_0 = E_0real + j * E_0imag
 
-# Polarization is the relationshiå between  E_0real + E_0imag
+###############################################################################################################################
+## Finds Frequency with mu, epsilon and betaVec.  !OBS! LOSSLESS (sigma = 0) => alpha = 0
+def findFreq_MuEpBeta(mu_r, epsilon_r, betaVec):
+    Up = findUp_EpMu(mu_r, epsilon_r)
+    beta_norm = np.linalg.norm(betaVec)
+    freq = (Up * beta_norm) / (2 * np.pi)
+    return freq
 
-## Linear polarization
+###############################################################################################################################
+## Finds E_0 with betaVec, omega, epsilon and H_0.  !OBS! LOSSLESS (sigma = 0) => alpha = 0
+def findE0_BetaOmegaEpH0(betaVec, omega, epsilon_r, H_0):
+    epsilon_zero = 8.854 * 10**(-12)
+
+    cross = np.cross(betaVec, H_0)
+    minusCross =  np.multiply((-1) , cross)
+    E_0 = np.divide(minusCross , (omega * epsilon_zero * epsilon_r))
+    return E_0
+    
+###############################################################################################################################
+## omega = 2 * pi * f
+def findOmega_Freq(freq):
+    omega = 2 * np.pi * freq
+    return omega
+
+###############################################################################################################################
+## Check quality of conductor or dielectric
+def qualityOfConDie(sigma, omega, epsilon_r):
+    epsilon_zero = 8.854 * 10**(-12)
+    medium = sigma / (omega * epsilon_zero * epsilon_r)
+
+    if(medium < 10**(-2)):
+        return "Low-loss dielectric"
+    elif(medium > 10**2):
+        return "Good conductor"
+    else:
+        return "Quasi-conductor"
+
+###############################################################################################################################
+## Find intrinsic impedance
 
 
 
