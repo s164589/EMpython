@@ -102,3 +102,20 @@ print("n_c: ", func.findComRefraction(mu_r, epsilon_r, sigma, omega))
 
 # Spørgsmål 10
 
+# Non magnetic
+mu_r = 1
+
+n = 1.544
+
+# Maybe if SiO_2 have same conductivity as pure silicon
+sigma = 4.4*10**(-4) # 0
+
+epsilon_r = func.findEpsilon(mu_r, n)
+
+eta = func.findInImLossLess(mu_r, epsilon_r)
+
+E_0 = [1, 1.j, np.sqrt(3)]
+betaVec = [np.sqrt(3), 0, -1]
+
+print("S: ", func.findPower_EfieldEtaBetaEV(E_0, eta, betaVec))
+

@@ -120,7 +120,7 @@ def findMajorAndMinorSemiAxis(E_0real, E_0imag):
 ###############################################################################################################################
 ## Finds instant power 
 def emWavePowerInst(E_field, H_field):
-    S = np.cross(E_field, H_field)
+    S = np.cross(E_field, np.conj(H_field))
     return S
 
 ###############################################################################################################################
@@ -129,6 +129,15 @@ def emWavePowerRMS(E_field, H_field):
     cross = np.cross(E_field, np.conj(H_field))
     S = (1/2) * np.real(cross)
     
+    return S
+
+###############################################################################################################################
+## Find power with E-field or the norm of E-field, intrinsic impedance and beta vector
+def findPower_EfieldEtaBetaEV(E_field, eta, betaVec):
+    print(betaVec)
+    betaNormalizedVec = np.divide(betaVec, np.linalg.norm(betaVec))
+    print(betaNormalizedVec)
+    S = np.multiply((1/2) * (np.linalg.norm(E_field)**2) / eta, betaNormalizedVec)
     return S
 
 ##                                                                                                              Utilities
@@ -202,6 +211,18 @@ def findInIm(mu_r, epsilon_r, sigma, omega):
     return intrinsicImp
 
 ###############################################################################################################################
+## Find intrinsic impedance with mu, epsilon. 
+#### OBS lossless
+def findInImLossLess(mu_r, epsilon_r):
+    mu_zero = 4 * np.pi * 10**(-7)
+    epsilon_zero = 8.854 * 10**(-12)
+    epsilon = epsilon_zero * epsilon_r
+    mu = mu_zero * mu_r
+
+    intrinsicImp = np.sqrt(mu / epsilon) 
+    return intrinsicImp
+
+###############################################################################################################################
 ## Find skin depth with alpha
 def findSkinDepth_alpha(alpha):
     deltaS = 1 / alpha
@@ -263,9 +284,15 @@ def findComRefraction(mu_r, epsilon_r, sigma, omega):
     n_c = np.sqrt( mu_r * epsilon_c_r )
     return n_c
 
+############################################################################################################################### 
+## Find epsilon with mu and index of refraction
+def findEpsilon(mu_r, n):
+    epsilon_r = (n**2) / mu_r
+    return epsilon_r
 
 ############################################################################################################################### 
 ## Find H-field with intrinsic impedance, betaEigenVec and E-field
+###### OBS ikke testet
 def findHfield(intImp, betaEVec, E_field):
     cross = np.cross(betaEVec, E_field)
     H_field = np.multiply((1 / intImp), cross) 
