@@ -66,7 +66,10 @@ print("Medium quality: ", func.qualityOfConDie(sigma, func.findOmega_Freq(250*(1
 print("Intrinsic impedance: ", func.findInIm(mu_r, epsilon_r, sigma, omega))
 
 # Spørgsmål 4
-print("Up: ", func.findUp_MuEp(mu_r, epsilon_r))
+beta = func.findBeta(mu_r, epsilon_r, sigma, omega)
+print(beta)
+Up = omega / beta
+print("Up: ", Up)
 
 # Spørgsmål 5
 mu_r = 1

@@ -211,7 +211,8 @@ def splitRealImag(Field_0):
 
 
 ###############################################################################################################################
-## Finds Up (phase velocity) with mu and epsilon
+## Finds Up (phase velocity) with mu and epsilon 
+## OBS LOSSLESS or low losses
 def findUp_MuEp(mu_r, epsilon_r):
     mu_zero = 4 * np.pi * 10**(-7)
     epsilon_zero = 8.854 * 10**(-12)
