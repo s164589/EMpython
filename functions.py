@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##
-##  Author: Emil Svendsen
-##  Date:   14/11-2018
+##  Author:     Emil Svendsen
+##  Date:       14/11-2018
+##  Last edit:  20/11-2018
 
 import numpy as np
 
