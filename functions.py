@@ -245,6 +245,19 @@ def findOmega_Freq(freq):
     return omega
 
 ###############################################################################################################################
+## Find lambda with frequency, mu and epsilon !!OBS!! Lossless!! Ulaby s. 123
+def findLambdaWaveLenght(freq, mu_r, epsilon_r):
+    mu_zero = 4 * np.pi * 10**(-7)
+    mu = mu_zero * mu_r
+    epsilon_zero = 8.854 * 10**(-12)
+    epsilon = epsilon_zero * epsilon_r
+    
+    up = 1 / np.sqrt(mu * epsilon) ## ONLY LOSSLESS!!!
+    lambdaWaveLenght = up / freq
+    return lambdaWaveLenght
+
+
+###############################################################################################################################
 ## Check quality of conductor or dielectric
 def qualityOfConDie(sigma, omega, epsilon_r):
     epsilon_zero = 8.854 * 10**(-12)
@@ -359,3 +372,67 @@ def findHfield(intImp, betaEVec, E_field):
     H_field = np.multiply((1 / intImp), cross) 
     return H_field
 
+##                                                                                                              Antenna
+############################################################################################################################### 
+## Find effective Area with lambda and Directivity
+def findAe(Lambda, D):
+    Ae = ((Lambda**2) * D) / (4 * np.pi)
+    return Ae
+
+############################################################################################################################### 
+## Find Directivity with pattern solid angle (Omega_P)
+## !OBS! ikke testet
+def findDirectivity(Omega_P):
+    D = (4 * np.pi) / Omega_P
+    return D
+
+############################################################################################################################### 
+## Find radiation efficiency (xi) with R_rad and R_loss. Ulaby s. 416
+def findRadiationEfficiency(R_rad, R_loss):
+    xi = R_rad / (R_rad + R_loss)
+    return xi
+
+
+############################################################################################################################### 
+## Find R_loss with freq, a, l, mu and sigma. Ulaby s. 416
+def findR_loss(freq, a, l, mu_c, sigma_c):
+    mu_zero = 4 * np.pi * 10**(-7)
+    mu = mu_zero * mu_c
+    factor = l / (2 * np.pi * a)
+    Rloss = factor * np.sqrt((np.pi * freq * mu) / sigma_c)
+    return Rloss
+
+
+############################################################################################################################### 
+## Find R_in with R_rad and R_losses. Ulaby s. 416
+## !OBS! ikke testet
+def findR_in(R_rad, R_loss):
+    R_in = (R_rad + R_loss)
+    return R_in
+
+############################################################################################################################### 
+## Find P_t with I_0 and R_in. Ulaby s. 416
+## !OBS! ikke testet
+def findP_t(I_0, Rin):
+    Pt = (1/2) * (I_0**2) * Rin
+    return Pt
+
+############################################################################################################################### 
+## Find R_rad with l and lambda. Ulaby s. 417
+## !OBS! ikke testet
+def findR_rad(l, Lambda):
+    R_rad = 80 * (np.pi**2) * (l, Lambda)
+    return R_rad
+
+############################################################################################################################### 
+## Find Antenna gain with radiation efficiency (xi) and Directivity
+def findAntennaGain(xi, D):
+    Gain = xi * D
+    return Gain
+
+############################################################################################################################### 
+## Find Antenna gain in dB with radiation efficiency (xi) and Directivity
+def findAntennaGain_dB(xi, D):
+    Gain = xi * D
+    Gain_dB = 10*np.log10(Gain)
+    return Gain_dB

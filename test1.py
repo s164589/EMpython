@@ -144,7 +144,50 @@ tau = func.getTauPerpendicular(betaVec, n_vector, eta, eta_2)
 
 # Spørgsmål 12
 
-
-
 print("Power transmitted: ", func.getTransmittedPowerDensityPerpendicular(E_0, betaVec, n_vector, eta, eta_2), " %")
+
+
+# Spørgsmål 13
+
+freq = 88 * 10**6
+## In air
+epsilon_r = 1
+mu_r = 1
+
+## Half-wave dipole 
+D = 1.64
+Lambda = func.findLambdaWaveLenght(freq, mu_r, epsilon_r)
+Ae = func.findAe(Lambda, D)
+print("Effective area: ", Ae)
+
+# Spørgsmål 14
+
+## R_rad er ca 73 for en halv bølge Dipole
+R_rad = 73
+## Half-wave dipole 
+D = 1.64
+
+freq = 100 * 10**6 #100 MHz
+l = 1.5 # 1,5 m
+sigma = 35 * 10**6 # 35 MS/m
+mu_r = 1
+a = 0.5 * 10**(-2) # d = 1 cm
+
+R_loss = func.findR_loss(freq, a, l, mu_r, sigma)
+
+xi = func.findRadiationEfficiency(R_rad, R_loss)
+
+print("Radiation Efficiency: ", xi)
+
+# Spørgsmål 14
+## Half-wave dipole 
+D = 1.64
+
+gain = func.findAntennaGain_dB(xi, D)
+
+print("Antenna gain: ", gain, " dB")
+
+
+# Spørgsmål 15
+
 
