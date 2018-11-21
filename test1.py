@@ -190,4 +190,18 @@ print("Antenna gain: ", gain, " dB")
 
 # Spørgsmål 15
 
+freq = 1.5 * 10**9
+transGain = 20 # dB
+recGain = 10 # dB
+distance = 5 * 10**3 # 5 km
+powerOut = 0.5 * 10**3 # 0.5 kW
 
+## Epsilon and mu is one in air
+epsilon_r = 1
+mu_r = 1
+
+Lambda = func.findLambdaWaveLenght(freq, mu_r, epsilon_r)
+
+Prec = func.findReceivedPower_dB(transGain, recGain, Lambda, distance, powerOut)
+
+print("Received power: ", Prec)

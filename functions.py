@@ -436,3 +436,24 @@ def findAntennaGain_dB(xi, D):
     Gain = xi * D
     Gain_dB = 10*np.log10(Gain)
     return Gain_dB
+
+############################################################################################################################### 
+## Find received power with transmitter gain, receiver gain, lambda, distance (R) and transmitter power (Pt) Ulaby s. 428
+## Remember gain is not in dB
+def findReceivedPower(gainT, gainR, Lambda, R, Pt):
+    factor = gainT * gainR * Pt
+    sq = (Lambda / (4 * np.pi * R))**2
+    Prec = factor * sq
+    return Prec 
+
+############################################################################################################################### 
+## Find received power with transmitter gain, receiver gain, lambda, distance (R) and transmitter power (Pt) Ulaby s. 428
+def findReceivedPower_dB(gainT_dB, gainR_dB, Lambda, R, Pt):
+    gainR = 10**(gainR_dB / 10)
+    gainT = 10**(gainT_dB / 10)
+    factor = gainT * gainR * Pt
+    sq = (Lambda / (4 * np.pi * R))**2
+    Prec = factor * sq
+    return Prec 
+
+
