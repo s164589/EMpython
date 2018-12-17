@@ -4,11 +4,13 @@ This python lib can be used freely but it's build for solving problems in course
 
 <h1>31035 Anvendt elektromagnetisme</h1>
 
-Install python 3 </br>
-**Install pip**
-> sudo apt install python3-pip
-**INSTALL numpy**
+
+**Install python 3 and pip**
+> sudo apt install python3 python3-pip
+
+**Install numpy**
 >pip3 install numpy
+
 <ol type="1">
  <li><b>Numpy</b>
   <ul>
