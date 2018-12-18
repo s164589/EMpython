@@ -43,6 +43,7 @@ def isWaveOnlyElliptical(E_0real, E_0imag):
 
 ###############################################################################################################################
 ## Returns waves polarization
+## Test
 def getPolarization(E_0real, E_0imag):
     if(np.equal(E_0real, 0).all() and np.equal(E_0imag, 0).all()):
             print("Both vectors can't be zero.")
