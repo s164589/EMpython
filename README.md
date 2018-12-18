@@ -13,9 +13,11 @@ This python lib can be used freely but it's build for solving problems in course
 
 1. functions.py
 - getPolarization(E_0real, E_0imag)
+
   **Input**
     > E_0real and E_0imag are real vectors
     > Should also work with H_0real and H_0imag as well
+    
   **Output** 
     > Returns polarization
     > Else returns bool False
