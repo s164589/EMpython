@@ -12,9 +12,13 @@ This python lib can be used freely but it's build for solving problems in course
 >pip3 install numpy
 
 <ol type="1">
- <li><b>Numpy</b>
+ <li><b>functions.py</b>
   <ul>
-   <li>Test1</li>
+   <li>getPolarization(E_0real, E_0imag)</li>
+    <ul>
+     <li>return polarization</li>
+     <li>else returns bool False</li>
+    </ul>
    <li>Test2</li>
   </ul>
  </li>
