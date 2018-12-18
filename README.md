@@ -1,4 +1,4 @@
-# EMpython
+# EMpython - documentation not finished 
 This python lib can be used freely but it's build for solving problems in course 31035 "Anvendt elektromagnetisme" DTU
 
 
