@@ -2,7 +2,7 @@
 This python lib can be used freely but it's build for solving problems in course 31035 "Anvendt elektromagnetisme" DTU
 
 
-<h1>31035 Anvendt elektromagnetisme</h1>
+## 31035 Anvendt elektromagnetisme
 
 
 **Install python 3 and pip**
@@ -45,7 +45,7 @@ This python lib can be used freely but it's build for solving problems in course
       
     **Output** 
       > Returns left or right polarization
-      
+
       > Else returns error message
   
 
