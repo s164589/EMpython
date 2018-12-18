@@ -9,29 +9,14 @@ This python lib can be used freely but it's build for solving problems in course
 > sudo apt install python3 python3-pip
 
 **Install numpy**
->pip3 install numpy
+> pip3 install numpy
 
-<ol type="1">
- <li><b>functions.py</b>
-  <ul>
-   <li>getPolarization(E_0real, E_0imag)</li>
-    <ul>
-      <li>
-        >E_0real and E_0imag are real vectors
-        >Should also work with H_0real and H_0imag as well
-      </li>
-     <li>return polarization</li>
-     <li>else returns bool False</li>
-    </ul>
-   <li>Test2</li>
-  </ul>
- </li>
- <li><b>Scipy</b>
-  <ul>
-   <li>Test1</li>
-   <li>Test2</li>
-   <li>Test3</li>
-  </ul></li>
- 
+1. functions.py
+- getPolarization(E_0real, E_0imag)
+- - Input
+        > E_0real and E_0imag are real vectors
+        > Should also work with H_0real and H_0imag as well
+- - Output
+        > Returns polarization
+        > Else returns bool False
 
-</ol>
